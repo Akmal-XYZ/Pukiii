@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Forum Chat</title>
+</head>
+<body>
+    <h1>Forum Chat</h1>
+    
+    <div id="chatbox"></div>
+    
+    <input type="text" id="message" placeholder="Type your message here">
+    <button onclick="sendMessage()">Send</button>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function sendMessage() {
+            var message = $('#message').val();
+            $('#chatbox').append('<p>' + message + '</p>');
+            
+            $.ajax({
+                url: 'index.php',
+                type: 'POST',
+                data: { message: message },
+                success: function(response) {
+                    console.log(response);
+                }
+            });
+            
+            $('#message').val('');
+        }
+    </script>
+</body>
+</html>
